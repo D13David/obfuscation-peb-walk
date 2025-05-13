@@ -58,7 +58,7 @@ struct ObfusctedString
     };
 };
 
-#define ObfuscatedString(str)                                                                           \
+#define _S(str)                                                                           \
     []() -> const char* {                                                                               \
         constexpr auto N = sizeof(str);                                                                 \
         constexpr auto Blob = ObfusctedString<N>(str, seed(__FILE__, __TIME__)); \

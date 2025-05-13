@@ -5,7 +5,7 @@
 #include <winternl.h>
 #include "utils.h"
 
-#define FUNCTION(Name) \
+#define _PROC(Name) \
     GetProcAddressFromPEB<P##Name>(#Name)
 
 extern "C" {
