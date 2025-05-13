@@ -1,7 +1,5 @@
 #pragma once
 
-#include <string>
-
 constexpr unsigned int FNV1A_SEED = 0x811c9dc5u;
 
 constexpr unsigned int fnv1a32(const char* str, size_t length, unsigned int seed)
