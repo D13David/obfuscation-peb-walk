@@ -27,12 +27,12 @@ constexpr unsigned int seed(const char(&s1)[N], const char(&s2)[M])
     return fnv1a32(s1) ^ fnv1a32(s2);
 }
 
-constexpr unsigned int modulus() {
-    return 0x7fffffff;
-}
-
-constexpr unsigned int prng(const unsigned int input) {
-    return (input * 48271) % modulus();
+constexpr unsigned int xorshift(unsigned int state) 
+{
+    state ^= (state << 13);
+    state ^= (state >> 17);
+    state ^= (state << 5);
+    return state % 0x7fffffff;
 }
 
 #pragma optimize("", off)
@@ -41,7 +41,7 @@ constexpr const char* EncryptDecrypt(unsigned int seed, const char* src, char* d
     for (unsigned int index = 0, rnd = seed; index < size; index++)
     {
         dst[index] = src[index] ^ rnd;
-        rnd = prng(rnd);
+        rnd = xorshift(rnd);
     }
     return dst;
 }
